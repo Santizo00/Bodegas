@@ -1,0 +1,21 @@
+# Ignorar archivos generados por el editor
+.vscode/
+.idea/
+
+# Ignorar archivos temporales
+*.swp
+*~
+
+# Ignorar archivos de caché
+npm-cache/
+yarn-cache/
+
+# Ignorar archivos de configuración locales
+config.local.js
+
+# Ignorar la carpeta node_modules
+node_modules/
+
+dist/
+
+.env

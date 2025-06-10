@@ -1,0 +1,85 @@
+{
+  "name": "bodega",
+  "version": "1.0.1",
+  "description": "Sistema de Bodega",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\" \"npm run electron\"",
+    "frontend": "cd Frontend && npm run dev",
+    "backend": "cd Backend && npm start",
+    "electron": "wait-on http://localhost:3000 && wait-on http://localhost:5000 && electron .",
+    "build": "npm run build:frontend && npm run build:electron",
+    "build:frontend": "cd Frontend && npm run build",
+    "build:electron": "electron-builder",
+    "postinstall": "electron-builder install-app-deps",
+    "rebuild": "electron-rebuild -f"
+  },
+  "keywords": [
+    "logistica",
+    "electron",
+    "react",
+    "express"
+  ],
+  "author": "AxelSantizo",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "electron": "^29.4.6",
+    "electron-builder": "^25.1.8",
+    "electron-is-dev": "^3.0.1",
+    "electron-rebuild": "^3.2.9",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "com.bodega.app",
+    "productName": "Bodegas",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "splash.html",
+      "Frontend/dist/**/*",
+      "preload.js",
+      "splash_download.html"
+    ],
+    "extraResources": [
+      {
+        "from": "Backend",
+        "to": "backend"
+      }
+    ],
+    "asar": false,
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "icons/icon.ico"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "icons/icon.icns"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "icon": "icons/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "dependencies": {
+    "axios": "^1.8.4",
+    "node-fetch": "^2.6.7",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1"
+  }
+}
